@@ -8,6 +8,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
+        role: 1,
         email: '',
         password: '',
         password_confirmation: '',
@@ -100,6 +101,40 @@ export default function Register() {
                         message={errors.password_confirmation}
                         className="mt-2"
                     />
+                </div>
+
+                <div className="mt-4m flex flex-wrap gap-2">
+                    <InputLabel htmlFor="role-donor" value="I'm donor" />
+
+                    <TextInput
+                        id="role-donor"
+                        name="role"
+                        type="radio"
+                        value="1"
+                        className="mt-1 block"
+                        autoComplete="role"
+                        isFocused={true}
+                        onChange={(e) => setData('role', e.target.value)}
+                        required
+                        defaultChecked={!!data.role}
+                    />
+
+                    <InputLabel htmlFor="role-cause" value="/ Cause" />
+
+                    <TextInput
+                        id="role-cause"
+                        name="role"
+                        type="radio"
+                        value="0"
+                        className="mt-1 block"
+                        autoComplete="role"
+                        isFocused={true}
+                        onChange={(e) => setData('role', e.target.value)}
+                        defaultChecked={!data.role}
+                        required
+                    />
+
+                    <InputError message={errors.name} className="mt-2" />
                 </div>
 
                 <div className="mt-4 flex items-center justify-end">

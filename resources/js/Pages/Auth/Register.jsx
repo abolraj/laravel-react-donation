@@ -104,7 +104,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4m flex flex-wrap gap-2">
-                    <InputLabel htmlFor="role-donor" value="I'm donor" />
+                    <InputLabel htmlFor="role-donor" value="I'm Donor" />
 
                     <TextInput
                         id="role-donor"

@@ -54,7 +54,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('role'); // Role field for user types
             $table->timestamps();
         });
     }

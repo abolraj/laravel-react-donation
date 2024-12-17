@@ -46,4 +46,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function is_donor(): bool{
+        return !!$this->role;
+    }
 }

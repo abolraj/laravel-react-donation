@@ -11,6 +11,7 @@ class Cause extends Model
         'name',
         'description',
         'goal_amount',
+        'user_id',
     ];
 
     public function comments(): HasMany

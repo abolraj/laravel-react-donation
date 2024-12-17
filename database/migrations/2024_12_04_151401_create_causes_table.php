@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('causes', function (Blueprint $table) {
             $table->id(); // Cause ID
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->text('description');
             $table->decimal('goal_amount', 10, 2);

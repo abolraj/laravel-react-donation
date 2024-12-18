@@ -8,18 +8,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Donation extends Model
 {
     public $fillable = [
-        'donor_id',
+        'user_id',
         'cause_id',
         'amount',
         'date',
     ];
 
     public function donor(): BelongsTo{
-        return $this->belongsTo(Donor::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
-
     public function cause(): BelongsTo{
-        return $this->belongsTo(Donor::class);
+        return $this->belongsTo( Cause::class);
     }
 
 }

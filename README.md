@@ -65,27 +65,7 @@ class CreateUsersTable extends Migration
 }
 ```
 
-2. Donors Migration:
-```php
-class CreateDonorsTable extends Migration
-{
-    public function up()
-    {
-        Schema::create('donors', function (Blueprint $table) {
-            $table->id(); // Donor ID
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // User ID from users
-            $table->timestamps();
-        });
-    }
-
-    public function down()
-    {
-        Schema::dropIfExists('donors');
-    }
-}
-```
-
-3. Causes Migration:
+2. Causes Migration:
 ```php
 class CreateCausesTable extends Migration
 {
@@ -108,7 +88,7 @@ class CreateCausesTable extends Migration
 }
 ```
 
-4. Donations Migration:
+3. Donations Migration:
 ```php
 class CreateDonationsTable extends Migration
 {
@@ -116,7 +96,7 @@ class CreateDonationsTable extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id(); // Donation ID
-            $table->foreignId('donor_id')->constrained()->onDelete('cascade'); // Foreign key to donors
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to donors
             $table->foreignId('cause_id')->constrained()->onDelete('cascade'); // Foreign key to causes
             $table->decimal('amount', 10, 2);
             $table->timestamp('date');
@@ -131,7 +111,7 @@ class CreateDonationsTable extends Migration
 }
 ```
 
-5. Payment Transactions Migration:
+4. Payment Transactions Migration:
 ```php
 class CreatePaymentTransactionsTable extends Migration
 {
@@ -153,7 +133,7 @@ class CreatePaymentTransactionsTable extends Migration
 }
 ```
 
-6. Comments Migration:
+5. Comments Migration:
 ```php
 class CreateCommentsTable extends Migration
 {

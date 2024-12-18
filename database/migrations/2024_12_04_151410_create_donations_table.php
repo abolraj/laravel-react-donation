@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id(); // Donation ID
-            $table->foreignId('donor_id')->constrained()->onDelete('cascade'); // Foreign key to donors
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to donors
             $table->foreignId('cause_id')->constrained()->onDelete('cascade'); // Foreign key to causes
             $table->decimal('amount', 10, 2);
             $table->timestamp('date');

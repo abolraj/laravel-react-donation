@@ -16,7 +16,6 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
-            role: user.role,
         });
 
     const submit = (e) => {

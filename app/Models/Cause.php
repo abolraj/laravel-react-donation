@@ -39,8 +39,12 @@ class Cause extends Model
         return $this->donations()->get('amount')->sum('amount');
     }
 
+    public function remained_amount(){
+        return $this->goal_amount - $this->received_amount();
+    }
+
     public function is_open(): bool {
-        return $this->received_amount() >= $this->goal_amount;
+        return $this->received_amount() <= $this->goal_amount;
     }
 
     protected function receivedAmount(): Attribute {

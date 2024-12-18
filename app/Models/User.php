@@ -46,7 +46,4 @@ class User extends Authenticatable
         ];
     }
 
-    public function is_donor(): bool{
-        return !!$this->role;
-    }
 }

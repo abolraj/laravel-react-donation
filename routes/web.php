@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CauseController;
+use App\Http\Controllers\DonationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,5 +27,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('causes', CauseController::class);
+Route::resource('causes.donations', DonationController::class);
 
 require __DIR__.'/auth.php';

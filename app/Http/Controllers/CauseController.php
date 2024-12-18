@@ -27,7 +27,9 @@ class CauseController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        return Inertia::render('Cause/ShowCause');
+        return Inertia::render('Cause/IndexCause', [
+            'causes' => Cause::all(),
+        ]);
     }
 
     /**
@@ -61,7 +63,12 @@ class CauseController extends Controller implements HasMiddleware
      */
     public function show(Cause $cause)
     {
-        //
+        return Inertia::render('Cause/ShowCause', [
+            'cause' => $cause,
+            'comments' => $cause->comments,
+            'donations' => $cause->donations,
+            'dreamer' => $cause->dreamer,
+        ]);   
     }
 
     /**

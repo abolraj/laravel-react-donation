@@ -66,7 +66,7 @@ class CauseController extends Controller implements HasMiddleware
         return Inertia::render('Cause/ShowCause', [
             'cause' => $cause,
             'comments' => $cause->comments,
-            'donations' => $cause->donations,
+            'donations' => $cause->donations()->with("donor")->get(),
             'dreamer' => $cause->dreamer,
         ]);   
     }

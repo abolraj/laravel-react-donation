@@ -1,0 +1,15 @@
+# Use the official PHP 8.3 FPM image
+FROM php:8.3-fpm
+
+# Install necessary extensions
+RUN docker-php-ext-install bcmath \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install pdo_sqlite \
+    && docker-php-ext-install zip
+
+# Set the working directory
+WORKDIR /var/www
+
+# Copy the current directory contents into the container at /var/www
+COPY . .

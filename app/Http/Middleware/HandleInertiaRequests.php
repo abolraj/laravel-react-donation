@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Donation;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -34,6 +35,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'donations_amount' => Donation::get_all_donations_amount_formatted(),
         ];
     }
 }

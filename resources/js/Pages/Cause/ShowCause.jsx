@@ -1,13 +1,16 @@
 import Cause from "@/Components/Cause";
 import Donate from "@/Components/Donate";
+import PrimaryButton from "@/Components/PrimaryButton";
 import UserItem from "@/Components/UserItem";
+import Delete from "@/Icons/Delete";
+import Edit from "@/Icons/Edit";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 import MainLayout from "@/Layouts/MainLayout";
 import { Head, Link } from "@inertiajs/react";
 
 export default function ShowCause({
-    cause, comments, donations, dreamer, ...props
+    cause, comments, donations, dreamer, can, ...props
 }) {
 
     return (
@@ -16,6 +19,24 @@ export default function ShowCause({
             <section className="cause-container flex flex-col gap-3 p-2 w-96 mx-auto max-w-full ">
                 <Cause cause={cause}
                     className="w-full">
+                    {can.cause_update &&
+                        <Link href={route('causes.edit', cause.id)}>
+                            <PrimaryButton className="!bg-yellow-600 mt-2 w-full flex justify-between items-center pr-2" disabled={false}>
+                                Edit
+                                <Edit />
+                            </PrimaryButton>
+                        </Link>
+                    }
+                    <br />
+                    {can.cause_delete &&
+                        <Link href={route('causes.destroy', cause.id)} method="delete" data={{}}>
+                            <PrimaryButton className="!bg-red-600 mt-2 w-full flex justify-between items-center pr-2" disabled={false}>
+                                Delete
+                                <Delete />
+                            </PrimaryButton>
+                        </Link>
+                    }
+
                     <hr className="w-full border-2 border-blue-500 my-2 mt-5" />
                     <section className="cause-info p-2">
                         <section className="dreamer">

@@ -3,6 +3,7 @@ import Donate from "@/Components/Donate";
 import UserItem from "@/Components/UserItem";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
+import MainLayout from "@/Layouts/MainLayout";
 import { Head, Link } from "@inertiajs/react";
 
 export default function ShowCause({
@@ -10,7 +11,7 @@ export default function ShowCause({
 }) {
 
     return (
-        <AuthenticatedLayout>
+        <MainLayout sidebar={"Dream | Any one has his dream"}>
             <Head title={cause.name + " - Cause"} />
             <section className="cause-container flex flex-col gap-3 p-2 w-96 mx-auto max-w-full ">
                 <Cause cause={cause}
@@ -37,6 +38,6 @@ export default function ShowCause({
                     </section>
                 </Cause>
             </section>
-        </AuthenticatedLayout>
+        </MainLayout>
     )
 }

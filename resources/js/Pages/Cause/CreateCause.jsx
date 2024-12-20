@@ -5,6 +5,7 @@ import Textarea from '@/Components/Textarea';
 import TextInput from '@/Components/TextInput';
 import Title from '@/Components/Title';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function CauseCreate({ status, canResetPassword }) {
@@ -23,7 +24,7 @@ export default function CauseCreate({ status, canResetPassword }) {
     };
 
     return (
-        <AuthenticatedLayout>
+        <MainLayout sidebar={"Dream | Request your dream !"}>
             <Head title="Create Cause" />
 
             {status && (
@@ -34,7 +35,7 @@ export default function CauseCreate({ status, canResetPassword }) {
 
             <form onSubmit={submit} class="container w-96 max-w-full mx-auto p-2 mt-4">
                 <Title className="border-b-2 border-blue-500 mx-auto w-full text-center">
-                    Create Your Campaign !
+                    Create Your Dream !
                 </Title>
 
                 <div className="mt-4">
@@ -97,6 +98,6 @@ export default function CauseCreate({ status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
             </form>
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }

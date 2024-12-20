@@ -20,7 +20,7 @@ export default forwardRef(function TextInput(
         <h3
             {...props}
             className={
-                'text-gray-900 bg-gray-300 dark:bg-gray-900 dark:text-gray-300 text-lg ' +
+                'text-gray-900 bg-gray-300 dark:bg-gray-900 dark:text-gray-300 text-lg !bg-opacity-40 ' +
                 className
             }
             ref={localRef}

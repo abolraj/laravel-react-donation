@@ -22,7 +22,9 @@ class UpdateCauseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|min:5',
+            'description' => 'required|string|min:10',
+            'goal_amount' => 'required|numeric|min:0',
         ];
     }
 }

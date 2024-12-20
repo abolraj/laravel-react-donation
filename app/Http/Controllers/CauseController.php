@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Cause;
 use App\Http\Requests\StoreCauseRequest;
 use App\Http\Requests\UpdateCauseRequest;
+use App\Models\User;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use function Pest\Laravel\withMiddleware;
 
@@ -16,7 +18,8 @@ class CauseController extends Controller implements HasMiddleware
     /**
      * Handle Middleware
      */
-    public static function middleware(){
+    public static function middleware()
+    {
         return [
             new Middleware('auth', except: ['index', 'show']),
         ];
@@ -52,7 +55,7 @@ class CauseController extends Controller implements HasMiddleware
             'user_id' => $request->user()->id,
         ]);
 
-        if($cause)
+        if ($cause)
             return redirect()->route('causes.index');
         else
             return back(500);
@@ -63,12 +66,17 @@ class CauseController extends Controller implements HasMiddleware
      */
     public function show(Cause $cause)
     {
+        $user = Auth::user();
         return Inertia::render('Cause/ShowCause', [
+            'can' => [
+                'cause_update' => $user->can('update', $cause),
+                'cause_delete' => $user->can('delete', $cause),
+            ],
             'cause' => $cause,
             'comments' => $cause->comments,
             'donations' => $cause->donations()->with("donor")->get(),
             'dreamer' => $cause->dreamer,
-        ]);   
+        ]);
     }
 
     /**
@@ -76,7 +84,10 @@ class CauseController extends Controller implements HasMiddleware
      */
     public function edit(string $id)
     {
-        //
+        $cause = Cause::find(1);
+        return Inertia::render('Cause/EditCause', [
+            'cause' => $cause,
+        ]);
     }
 
     /**
@@ -84,7 +95,18 @@ class CauseController extends Controller implements HasMiddleware
      */
     public function update(UpdateCauseRequest $request, Cause $cause)
     {
-        //
+        $cause->update([
+            'name' => $request->validated('name'),
+            'description' => $request->validated('description'),
+            'goal_amount' => $request->validated('goal_amount'),
+            'user_id' => $request->user()->id,
+        ]);
+
+
+        if ($cause->save())
+            return redirect()->route('causes.show', $cause->id);
+        else
+            return back(500);
     }
 
     /**
@@ -92,6 +114,9 @@ class CauseController extends Controller implements HasMiddleware
      */
     public function destroy(Cause $cause)
     {
-        //
+        if ($cause->delete())
+            return redirect()->route('causes.index');
+        else
+            return back(500);
     }
 }

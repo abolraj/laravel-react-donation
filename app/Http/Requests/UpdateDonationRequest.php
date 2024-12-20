@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Closure;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateDonationRequest extends FormRequest
@@ -22,7 +23,18 @@ class UpdateDonationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'amount' => [
+                'required',
+                'integer',
+                function (string $attr, mixed $val, Closure $fail) {
+
+                    if (!$this->route('cause')->is_open()) {
+                        $fail("The $attr is full and closed !");
+                    }
+                },
+                'gt:0',
+                'max:' . max($this->route('cause')->remained_amount(), 0),
+            ]
         ];
     }
 }

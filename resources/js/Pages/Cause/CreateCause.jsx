@@ -8,7 +8,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function CauseCreate({ status, canResetPassword }) {
+export default function CreateCause({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         description: '',

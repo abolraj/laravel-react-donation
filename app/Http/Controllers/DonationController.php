@@ -6,10 +6,23 @@ use App\Models\Donation;
 use App\Http\Requests\StoreDonationRequest;
 use App\Http\Requests\UpdateDonationRequest;
 use App\Models\Cause;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Date;
 
-class DonationController extends Controller
+class DonationController extends Controller implements HasMiddleware
 {
+
+    /**
+     * Handle middleware
+     */
+    public static function middleware(){
+        return [
+            new Middleware('auth', except:['index', 'show']),
+        ];
+    }
+
+
     /**
      * Display a listing of the resource.
      */

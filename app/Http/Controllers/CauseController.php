@@ -84,7 +84,7 @@ class CauseController extends Controller implements HasMiddleware
      */
     public function edit(string $id)
     {
-        $cause = Cause::find(1);
+        $cause = Cause::find($id);
         return Inertia::render('Cause/EditCause', [
             'cause' => $cause,
         ]);

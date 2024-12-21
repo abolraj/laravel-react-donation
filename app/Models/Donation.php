@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -13,6 +14,13 @@ class Donation extends Model
         'amount',
         'date',
     ];
+
+    public static function booted(): void{
+        static::addGlobalScope('verifieds', function(Builder $builder){
+            $verfiedPaymentTransactions = PaymentTransaction::where('status', '=', 'verified');
+            $builder->whereIn('id', $verfiedPaymentTransactions->get('donation_id'));
+        });
+    }
 
     public function donor(): BelongsTo
     {

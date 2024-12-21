@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CauseController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Cause;
 use Illuminate\Foundation\Application;
@@ -30,5 +31,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('causes', CauseController::class);
 Route::resource('causes.donations', DonationController::class);
+Route::get("/pay", [PaymentController::class, "pay"])->name('payment');
 
 require __DIR__.'/auth.php';

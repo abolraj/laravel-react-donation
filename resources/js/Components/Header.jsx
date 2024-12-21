@@ -32,7 +32,7 @@ export default function Header({
             <div className="flex lg:col-start-2 justify-end lg:justify-center">
                 <Help className="!size-36 w-auto lg:h-16 text-[#FF2D20] hover:rotate-6" />
             </div>
-            <nav className="col-span-2 lg:col-span-1 flex flex-1 justify-end">
+            <nav className="col-span-2 sm:col-span-1 flex flex-1 justify-end">
                 {auth.user ? (
                     <Link
                         href={route('dashboard')}

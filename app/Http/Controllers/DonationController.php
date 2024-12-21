@@ -6,9 +6,13 @@ use App\Models\Donation;
 use App\Http\Requests\StoreDonationRequest;
 use App\Http\Requests\UpdateDonationRequest;
 use App\Models\Cause;
+use App\Models\PaymentTransaction;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Date;
+use Inertia\Inertia;
+use Shetabit\Multipay\Invoice;
+use Shetabit\Payment\Facade\Payment;
 
 class DonationController extends Controller implements HasMiddleware
 {
@@ -44,15 +48,23 @@ class DonationController extends Controller implements HasMiddleware
      */
     public function store(StoreDonationRequest $request, Cause $cause)
     {
-        $donation = Donation::create([
+        $data = [
             'amount' => $request->validated('amount'),
             'user_id' => $request->user()->id,
             'cause_id' => $cause->id,
             'date' => Date::createFromTimestamp(LARAVEL_START)->toDateTimeString(),
-        ]);
+        ];
+
+        $donation = Donation::create($data);
 
         if($donation)
-            return redirect(route('causes.show',$cause->id));
+            return Inertia::location(route('payment',[
+                "title" => $cause->name,
+                "desc" => $cause->description,
+                "amount" => $data['amount'],
+                "donation_id" => $donation->id,
+            ]));
+            // return redirect(route('causes.show',$cause->id));
         else
             return back(500);
     }

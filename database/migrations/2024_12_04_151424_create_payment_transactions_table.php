@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('payment_transactions', function (Blueprint $table) {
             $table->id(); // Transaction ID
             $table->foreignId('donation_id')->constrained()->onDelete('cascade'); // Foreign key to donations
+            $table->string('transaction_id');
             $table->string('status');
             $table->string('payment_method');
             $table->timestamps();

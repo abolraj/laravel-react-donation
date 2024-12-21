@@ -7,22 +7,23 @@ import Edit from "@/Icons/Edit";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 import MainLayout from "@/Layouts/MainLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 
 export default function ShowCause({
     cause, comments, donations, dreamer, can, ...props
 }) {
-
+    const lang = usePage().props.lang;
+    console.log(lang)
     return (
-        <MainLayout sidebar={"Dream | Any one has his dream"}>
+        <MainLayout sidebar={lang.messages.aside.dream}>
             <Head title={cause.name + " - Cause"} />
             <section className="cause-container flex flex-col gap-3 p-2 w-96 mx-auto max-w-full ">
                 <Cause cause={cause}
                     className="w-full">
                     {can.cause_update &&
                         <Link href={route('causes.edit', cause.id)}>
-                            <PrimaryButton className="!bg-yellow-600 mt-2 w-full flex justify-between items-center pr-2" disabled={false}>
-                                Edit
+                            <PrimaryButton className="!bg-yellow-600 mt-2 w-full flex justify-between items-center pe-2" disabled={false}>
+                                {lang.messages.button.edit}
                                 <Edit />
                             </PrimaryButton>
                         </Link>
@@ -30,8 +31,8 @@ export default function ShowCause({
                     <br />
                     {can.cause_delete &&
                         <Link href={route('causes.destroy', cause.id)} method="delete" data={{}}>
-                            <PrimaryButton className="!bg-red-600 mt-2 w-full flex justify-between items-center pr-2" disabled={false}>
-                                Delete
+                            <PrimaryButton className="!bg-red-600 mt-2 w-full flex justify-between items-center pe-2" disabled={false}>
+                                {lang.messages.button.delete}
                                 <Delete />
                             </PrimaryButton>
                         </Link>
@@ -40,11 +41,11 @@ export default function ShowCause({
                     <hr className="w-full border-2 border-blue-500 my-2 mt-5" />
                     <section className="cause-info p-2">
                         <section className="dreamer">
-                            <h3 className="text-blue-500 px-2 py-1 border-b-2 mb-2 border-b-blue-500">Dreamer</h3>
+                            <h3 className="text-blue-500 px-2 py-1 border-b-2 mb-2 border-b-blue-500">{lang.messages.dreams.dreamer}</h3>
                             <UserItem user={dreamer} />
                         </section>
                         <section className="donations flex flex-col gap-2">
-                            <h3 className="text-blue-500 px-2 py-1 border-b-2 mb-2 border-b-blue-500">Donations</h3>
+                            <h3 className="text-blue-500 px-2 py-1 border-b-2 mb-2 border-b-blue-500">{lang.messages.donation.donations}</h3>
                             {cause.received_amount <= cause.goal_amount &&
                                 <Donate cause={cause} />
                             }

@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+@font-face {
+    font-family: 'Digi Sarvenaz';
+    src: url('../fonts/Sarvenaz/Digi Sarvenaz.ttf') format('truetype'),
+        url('../fonts/Sarvenaz/Digi Sarvenaz.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+    font-size: 4rem;
+}
+

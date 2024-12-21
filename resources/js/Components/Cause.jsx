@@ -1,6 +1,6 @@
 import Help from '@/Icons/Help';
 import Tik from '@/Icons/Tik';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 export default forwardRef(function Cause(
@@ -8,7 +8,7 @@ export default forwardRef(function Cause(
     ref,
 ) {
 
-
+    const lang = usePage().props.lang
     const [isOpen, setIsOpen] = useState(null);
     const localRef = useRef(null);
 
@@ -37,28 +37,30 @@ export default forwardRef(function Cause(
                         isOpen
                             ? (
                                 <h3 className="badge open flex gap-1 items-center text-pink-700 bg-pink-400 bg-opacity-15 p-2 py-1 rounded-md">
-                                    Closed
+                                    {/* Closed */}
+                                    {lang.messages.cause.close}
                                     <Tik />
                                 </h3>
                             )
 
                             : (
                                 <h3 className="badge open flex gap-1 items-center text-green-700 bg-green-400 bg-opacity-15 p-2 py-1 rounded-md">
-                                    Open
+                                    {/* Open */}
+                                    {lang.messages.cause.open}
                                     <Help />
                                 </h3>
                             )
                     }
-                    <h3 className="flex relative justify-between text-green-700 bg-green-400 bg-opacity-15 p-2 py-1 rounded-md w-full">
+                    <h3 className="flex [direction:ltr] relative justify-between text-green-700 bg-green-400 bg-opacity-15 p-2 py-1 rounded-md w-full">
                         <div className="range absolute rounded-md h-full left-0 top-0 bg-green-400 bg-opacity-25" style={{ width: Math.min(parseInt((cause.received_amount / cause.goal_amount) * 100), 100) + "%" }}>
 
                         </div>
                         <span>
-                            {cause.received_amount} $
+                            {cause.received_amount} {lang.messages.currency}
                         </span>
                         /
                         <span>
-                            {cause.goal_amount} $
+                            {cause.goal_amount} {lang.messages.currency}
                         </span>
                     </h3>
                 </div>

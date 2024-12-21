@@ -1,5 +1,5 @@
 import User from '@/Icons/User';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { forwardRef, useRef, useState } from 'react';
 import InputLabel from './InputLabel';
 import TextInput from './TextInput';
@@ -10,6 +10,7 @@ export default forwardRef(function Donate(
     { cause, className = '', ...props },
     ref,
 ) {
+    const lang = usePage().props.lang
     const localRef = useRef(null);
     const { data, setData, post, processing, errors, reset } = useForm({
         amount: 0,
@@ -36,13 +37,13 @@ export default forwardRef(function Donate(
         >
             <form onSubmit={submit} className="flex flex-col gap-2 p-2 items-stretch justify-start ">
                 <div className="">
-                    <InputLabel htmlFor="amount" value="Need your help !" className="!text-blue-500"/>
+                    <InputLabel htmlFor="amount" value={lang.messages.donation.need_help} className="!text-blue-500"/>
 
                     <TextInput
                         id="amount"
                         type="text"
                         name="amount"
-                        placeholder="Give your help e.g. 10$"
+                        placeholder={lang.messages.donation.give_help}
                         value={data.amount}
                         className="mt-1 block w-full"
                         autoComplete="current-amount"
@@ -53,7 +54,8 @@ export default forwardRef(function Donate(
                 </div>
 
                 <PrimaryButton className="" disabled={processing}>
-                    Donate It !
+                    {/* Donate It ! */}
+                    {lang.messages.button.donate}
                 </PrimaryButton>
             </form>
         </section>

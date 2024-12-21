@@ -1,10 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+@import url(./font_en.css);
+@import url(./font_fa.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-    font-family: Quicksand, 'Courier New', Courier, monospace;
+    font-family: 'Quicksand', 'Courier New', Courier, monospace;
+}
+
+*:lang(fa) {
+    font-size: 1.3rem;
+    font-family: 'Digi Sarvenaz', 'Courier New', Courier, monospace;
+}
+html:lang(fa) {
+    direction: rtl;
 }
 
 /* .background-pattern {

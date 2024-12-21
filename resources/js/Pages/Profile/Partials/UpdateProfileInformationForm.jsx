@@ -11,6 +11,7 @@ export default function UpdateProfileInformation({
     className = '',
 }) {
     const user = usePage().props.auth.user;
+    const lang = usePage().props.lang;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -28,17 +29,17 @@ export default function UpdateProfileInformation({
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    Profile Information
+                    {lang.messages.auth.profile_info}
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
+                    {lang.messages.auth.update_profile_info}
                 </p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value={lang.messages.auth.name} />
 
                     <TextInput
                         id="name"
@@ -54,7 +55,7 @@ export default function UpdateProfileInformation({
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value={lang.messages.auth.email} />
 
                     <TextInput
                         id="email"
@@ -93,7 +94,7 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing}>{lang.messages.button.save}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -103,7 +104,7 @@ export default function UpdateProfileInformation({
                         leaveTo="opacity-0"
                     >
                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Saved.
+                            {lang.messages.auth.saved}
                         </p>
                     </Transition>
                 </div>

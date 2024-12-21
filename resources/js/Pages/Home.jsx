@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import IndexCause from './Cause/IndexCause';
 import Header from '@/Components/Header';
 import Sidebar from '@/Components/Sidebar';
@@ -7,9 +7,10 @@ import Footer from '@/Components/Footer';
 import MainLayout from '@/Layouts/MainLayout';
 
 export default function Welcome({ auth, laravelVersion, phpVersion, causes }) {
+    const lang = usePage().props.lang;
     return (
         <MainLayout sidebar={null}>
-            <Head title="Welcome" />
+            <Head title={lang.messages.app} />
             <IndexCause causes={causes} has_layout={false}/>
         </MainLayout>
     );

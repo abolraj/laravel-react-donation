@@ -6,9 +6,11 @@ import TextInput from '@/Components/TextInput';
 import Title from '@/Components/Title';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function CreateCause({ status, canResetPassword }) {
+    const lang = usePage().props.lang;
+    console.log(lang)
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         description: '',
@@ -24,8 +26,8 @@ export default function CreateCause({ status, canResetPassword }) {
     };
 
     return (
-        <MainLayout sidebar={"Dream | Request your dream !"}>
-            <Head title="Create Cause" />
+        <MainLayout sidebar={lang.messages.aside.dream_create}>
+            <Head title={lang.messages.aside.dream_create} />
 
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
@@ -35,18 +37,18 @@ export default function CreateCause({ status, canResetPassword }) {
 
             <form onSubmit={submit} class="container w-96 max-w-full mx-auto p-2 mt-4">
                 <Title className="border-b-2 border-blue-500 mx-auto w-full text-center">
-                    Create Your Dream !
+                    {lang.messages.cause.title_create}
                 </Title>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value={lang.messages.cause.name} />
 
                     <TextInput
                         id="name"
                         type="text"
                         name="name"
                         value={data.name}
-                        placeholder="Name it camp !"
+                        placeholder={lang.messages.cause.alt_name}
                         className="mt-1 block w-full"
                         autoComplete="title"
                         isFocused={true}
@@ -57,13 +59,13 @@ export default function CreateCause({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="description" value="Description" />
+                    <InputLabel htmlFor="description" value={lang.messages.cause.description} />
 
                     <Textarea
                         id="description"
                         type="description"
                         name="description"
-                        placeholder="Describe your cause campaign..."
+                        placeholder={lang.messages.cause.alt_description}
                         value={data.description}
                         className="mt-1 block w-full"
                         autoComplete="current-description"
@@ -75,14 +77,14 @@ export default function CreateCause({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="goal_amount" value="Goal Amount" />
+                    <InputLabel htmlFor="goal_amount" value={lang.messages.cause.goal_amount} />
 
                     <TextInput
                         id="goal_amount"
                         type="number"
                         name="goal_amount"
                         value={data.goal_amount}
-                        placeholder="Give your needed amount"
+                        placeholder={lang.messages.cause.alt_goal_amount}
                         className="mt-1 block w-full"
                         autoComplete="number"
                         isFocused={true}
@@ -94,7 +96,7 @@ export default function CreateCause({ status, canResetPassword }) {
 
                 <div className="mt-4 flex items-center justify-end">
                     <PrimaryButton className="w-full" disabled={processing}>
-                        Create It !
+                        {lang.messages.button.create}
                     </PrimaryButton>
                 </div>
             </form>

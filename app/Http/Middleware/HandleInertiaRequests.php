@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Donation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -36,6 +37,9 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'donations_amount' => Donation::get_all_donations_amount_formatted(),
+            'lang' => [
+                'messages' => Lang::get('messages'),
+            ],
         ];
     }
 }

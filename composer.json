@@ -14,6 +14,7 @@
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "shetabit/payment": "^5.8",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
